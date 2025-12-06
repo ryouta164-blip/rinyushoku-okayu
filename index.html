@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>離乳食 おかゆ計算ツール</title>
+
+<style>
+    body {
+        font-family: "Helvetica", "Yu Gothic", sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: #fff7e6;
+        color: #333;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 24px;
+        background: #ffb86c;
+        padding: 10px 0;
+        border-radius: 10px;
+        color: white;
+        margin-bottom: 20px;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+    }
+
+    .box {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 25px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    label {
+        font-weight: bold;
+        display: block;
+        margin-top: 10px;
+    }
+
+    select, input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 6px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+    }
+
+    .btn {
+        margin-top: 20px;
+        width: 100%;
+        padding: 15px;
+        background: #4cc9f0;
+        color: white;
+        font-size: 18px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+    }
+
+    .btn:hover {
+        background: #3bb5d8;
+    }
+
+    .result {
+        margin-top: 15px;
+        background: #ffecc7;
+        padding: 15px;
+        border-radius: 10px;
+        font-size: 18px;
+    }
+
+</style>
+</head>
+<body>
+
+<h1>離乳食 おかゆ計算ツール</h1>
+
+<div class="box">
+    <h2>① 入れる量 → 水の量を計算</h2>
+
+    <label>倍率</label>
+    <select id="rate1">
+        <option>10倍</option>
+        <option>7倍</option>
+        <option>5倍</option>
+        <option>軟飯</option>
+    </select>
+
+    <label>米 / ごはん</label>
+    <select id="type1">
+        <option>米</option>
+        <option>ごはん</option>
+    </select>
+
+    <label>入れる量（g）</label>
+    <input type="number" id="amount1" placeholder="例：10">
+
+    <button class="btn" onclick="calcWater()">水の量を計算</button>
+
+    <div id="result1" class="result" style="display:none;"></div>
+</div>
+
+
+<div class="box">
+    <h2>② 完成量 → 米・水を逆算</h2>
+
+    <label>完成させたい量（g）</label>
+    <input type="number" id="finish" placeholder="例：100">
+
+    <label>倍率</label>
+    <select id="rate2">
+        <option>10倍</option>
+        <option>7倍</option>
+        <option>5倍</option>
+        <option>軟飯</option>
+    </select>
+
+    <label>米 / ごはん</label>
+    <select id="type2">
+        <option>米</option>
+        <option>ごはん</option>
+    </select>
+
+    <button class="btn" onclick="calcReverse()">逆算する</button>
+
+    <div id="result2" class="result" style="display:none;"></div>
+</div>
+
+<script>
+function calcWater() {
+    const rate = document.getElementById("rate1").value;
+    const type = document.getElementById("type1").value;
+    const amount = Number(document.getElementById("amount1").value);
+
+    let factor = 0;
+
+    if(rate === "10倍") factor = (type === "米") ? 10 : 9;
+    if(rate === "7倍")  factor = (type === "米") ? 7 : 6;
+    if(rate === "5倍")  factor = (type === "米") ? 5 : 4;
+    if(rate === "軟飯") factor = (type === "米") ? 2 : 1.5;
+
+    const water = amount * factor;
+
+    document.getElementById("result1").style.display = "block";
+    document.getElementById("result1").innerHTML =
+        `必要な水の量：<b>${water} g</b>`;
+}
+
+
+function calcReverse() {
+    const finish = Number(document.getElementById("finish").value);
+    const rate = document.getElementById("rate2").value;
+    const type = document.getElementById("type2").value;
+
+    let totalRatio = 0;
+
+    if(rate === "10倍") totalRatio = (type === "米") ? 11 : 10;
+    if(rate === "7倍")  totalRatio = (type === "米") ? 8 : 7;
+    if(rate === "5倍")  totalRatio = (type === "米") ? 6 : 5;
+    if(rate === "軟飯") totalRatio = (type === "米") ? 3 : 2.5;
+
+    const base = finish / totalRatio;
+    const water = finish - base;
+
+    document.getElementById("result2").style.display = "block";
+    document.getElementById("result2").innerHTML =
+        `必要な${type}：<b>${base.toFixed(1)} g</b><br>必要な水：<b>${water.toFixed(1)} g</b>`;
+}
+</script>
+
+</body>
+</html>
