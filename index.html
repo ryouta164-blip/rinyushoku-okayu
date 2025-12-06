@@ -19,6 +19,16 @@ h1 { text-align:center; font-size:24px; background:#ffb86c; padding:10px 0; bord
 .tab-content { display:none; }
 .tab-content.active { display:block; }
 .ad-box { margin-top:15px; text-align:center; }
+
+/* ▼ 注意書きデザイン ▼ */
+.notice {
+    font-size: 12px;
+    color: #666;
+    padding: 10px;
+    margin-top: 30px;
+    text-align: center;
+    line-height: 1.6;
+}
 </style>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5612396730307003" crossorigin="anonymous"></script>
@@ -92,6 +102,15 @@ h1 { text-align:center; font-size:24px; background:#ffb86c; padding:10px 0; bord
     </div>
 </div>
 
+<!-- ▼▼ 追加した注意書き ▼▼ -->
+<div class="notice">
+    本ツールは、一般的に紹介されている離乳食のおかゆ比率を参考に作成しています。<br>
+    医学的・専門的な助言を提供するものではありません。<br>
+    実際の調理や離乳食の進め方は、お子さまの状態や医師・専門家の指導に従ってください。<br>
+    本ツールを用いて生じたいかなる損害についても、制作者は一切責任を負いません。<br>
+    自己責任でご利用ください。
+</div>
+
 <script>
 // タブ切り替え
 function showTab(n) {
@@ -100,7 +119,6 @@ function showTab(n) {
     for(let i=0;i<tabs.length;i++){ tabs[i].classList.remove("active"); btns[i].classList.remove("active"); }
     document.getElementById("tab"+n).classList.add("active");
     btns[n-1].classList.add("active");
-    // 広告再読み込み
     (adsbygoogle = window.adsbygoogle || []).push({});
 }
 
@@ -150,7 +168,6 @@ function calcReverse(){
     document.getElementById("result2").innerHTML=`必要な${type}：<b>${base.toFixed(1)} g</b><br>必要な水：<b>${water.toFixed(1)} g</b>`;
 }
 
-// リアルタイム計算
 document.getElementById("amount1").addEventListener("input", calcWater);
 document.getElementById("finish").addEventListener("input", calcReverse);
 </script>
