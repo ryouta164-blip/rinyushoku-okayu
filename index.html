@@ -79,8 +79,8 @@
     }
 </style>
 
-<!-- AdSense ライブラリ -->
-<script data-ad-client="ca-pub-561239673030700" async
+<!-- AdSenseライブラリ -->
+<script data-ad-client="ca-pub-5612396730307003" async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
 </head>
@@ -116,16 +116,12 @@
     <div class="ad-box">
         <ins class="adsbygoogle"
              style="display:block"
-             data-ad-client="ca-pub-5612396730307003"
+             data-ad-client="5612396730307003"
              data-ad-slot="1111111111"
              data-ad-format="auto"
              data-full-width-responsive="true"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
     </div>
 </div>
-
 
 <div class="box">
     <h2>② 米またはご飯・水の量を計算</h2>
@@ -159,9 +155,6 @@
              data-ad-slot="2222222222"
              data-ad-format="auto"
              data-full-width-responsive="true"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
     </div>
 </div>
 
@@ -170,6 +163,11 @@ function calcWater() {
     const rate = document.getElementById("rate1").value;
     const type = document.getElementById("type1").value;
     const amount = Number(document.getElementById("amount1").value);
+
+    if (!amount || amount <= 0) {
+        alert("量を正しく入力してください");
+        return;
+    }
 
     let factor = 0;
     if(rate === "10倍") factor = (type === "米") ? 10 : 9;
@@ -185,3 +183,39 @@ function calcWater() {
 }
 
 function calcReverse() {
+    const finish = Number(document.getElementById("finish").value);
+    const rate = document.getElementById("rate2").value;
+    const type = document.getElementById("type2").value;
+
+    if (!finish || finish <= 0) {
+        alert("完成量を正しく入力してください");
+        return;
+    }
+
+    let totalRatio = 0;
+    if(rate === "10倍") totalRatio = (type === "米") ? 11 : 10;
+    if(rate === "7倍")  totalRatio = (type === "米") ? 8 : 7;
+    if(rate === "5倍")  totalRatio = (type === "米") ? 6 : 5;
+    if(rate === "軟飯") totalRatio = (type === "米") ? 3 : 2.5;
+
+    const base = finish / totalRatio;
+    const water = finish - base;
+
+    document.getElementById("result2").style.display = "block";
+    document.getElementById("result2").innerHTML =
+        `必要な${type}：<b>${base.toFixed(1)} g</b><br>必要な水：<b>${water.toFixed(1)} g</b>`;
+}
+
+// ページ読み込み時に広告を初期化
+window.onload = function() {
+    if (window.adsbygoogle) {
+        const ads = document.querySelectorAll('.adsbygoogle');
+        ads.forEach(ad => {
+            try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch(e){}
+        });
+    }
+};
+</script>
+
+</body>
+</html>
