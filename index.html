@@ -80,7 +80,7 @@
 <h1>離乳食 おかゆ計算ツール</h1>
 
 <div class="box">
-    <h2>① 入れる量 → 水の量を計算</h2>
+    <h2>① 必要な水量を計算</h2>
 
     <label>倍率</label>
     <select id="rate1">
@@ -93,10 +93,10 @@
     <label>米 / ごはん</label>
     <select id="type1">
         <option>米</option>
-        <option>ごはん</option>
+        <option>ご飯</option>
     </select>
 
-    <label>入れる量（g）</label>
+    <label>米またはご飯の量（g）</label>
     <input type="number" id="amount1" placeholder="例：10">
 
     <button class="btn" onclick="calcWater()">水の量を計算</button>
@@ -106,7 +106,7 @@
 
 
 <div class="box">
-    <h2>② 完成量 → 米・水を逆算</h2>
+    <h2>② 米または・水の量を計算</h2>
 
     <label>完成させたい量（g）</label>
     <input type="number" id="finish" placeholder="例：100">
@@ -119,10 +119,10 @@
         <option>軟飯</option>
     </select>
 
-    <label>米 / ごはん</label>
+    <label>米 / ご飯</label>
     <select id="type2">
         <option>米</option>
-        <option>ごはん</option>
+        <option>ご飯</option>
     </select>
 
     <button class="btn" onclick="calcReverse()">逆算する</button>
