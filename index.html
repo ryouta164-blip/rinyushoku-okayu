@@ -73,7 +73,16 @@
         font-size: 18px;
     }
 
+    .ad-box {
+        margin-top: 15px;
+        text-align: center;
+    }
 </style>
+
+<!-- AdSense ライブラリ -->
+<script data-ad-client="ca-pub-561239673030700" async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
 </head>
 <body>
 
@@ -90,7 +99,7 @@
         <option>軟飯</option>
     </select>
 
-    <label>米 / ごはん</label>
+    <label>米 / ご飯</label>
     <select id="type1">
         <option>米</option>
         <option>ご飯</option>
@@ -102,6 +111,19 @@
     <button class="btn" onclick="calcWater()">水の量を計算</button>
 
     <div id="result1" class="result" style="display:none;"></div>
+
+    <!-- 広告 -->
+    <div class="ad-box">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-5612396730307003"
+             data-ad-slot="1111111111"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
 </div>
 
 
@@ -128,6 +150,19 @@
     <button class="btn" onclick="calcReverse()">逆算する</button>
 
     <div id="result2" class="result" style="display:none;"></div>
+
+    <!-- 広告 -->
+    <div class="ad-box">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-5612396730307003"
+             data-ad-slot="2222222222"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
 </div>
 
 <script>
@@ -137,7 +172,6 @@ function calcWater() {
     const amount = Number(document.getElementById("amount1").value);
 
     let factor = 0;
-
     if(rate === "10倍") factor = (type === "米") ? 10 : 9;
     if(rate === "7倍")  factor = (type === "米") ? 7 : 6;
     if(rate === "5倍")  factor = (type === "米") ? 5 : 4;
@@ -150,27 +184,4 @@ function calcWater() {
         `必要な水の量：<b>${water} g</b>`;
 }
 
-
 function calcReverse() {
-    const finish = Number(document.getElementById("finish").value);
-    const rate = document.getElementById("rate2").value;
-    const type = document.getElementById("type2").value;
-
-    let totalRatio = 0;
-
-    if(rate === "10倍") totalRatio = (type === "米") ? 11 : 10;
-    if(rate === "7倍")  totalRatio = (type === "米") ? 8 : 7;
-    if(rate === "5倍")  totalRatio = (type === "米") ? 6 : 5;
-    if(rate === "軟飯") totalRatio = (type === "米") ? 3 : 2.5;
-
-    const base = finish / totalRatio;
-    const water = finish - base;
-
-    document.getElementById("result2").style.display = "block";
-    document.getElementById("result2").innerHTML =
-        `必要な${type}：<b>${base.toFixed(1)} g</b><br>必要な水：<b>${water.toFixed(1)} g</b>`;
-}
-</script>
-
-</body>
-</html>
